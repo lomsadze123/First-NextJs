@@ -35,6 +35,10 @@ const useTodo = () => {
     setShow(true);
     const todo = todos.find((todo) => todo._id === id);
     setEditedTodo(todo);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return {
