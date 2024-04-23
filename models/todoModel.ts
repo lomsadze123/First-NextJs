@@ -4,7 +4,7 @@ const todoSchema = new Schema(
   {
     todo: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   {

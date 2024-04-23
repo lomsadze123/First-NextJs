@@ -3,7 +3,7 @@
 import connectDB from "@/config/database";
 import TodoModel from "@/models/todoModel";
 
-const deleteTodo = async ({ id }: { id: string }) => {
+const deleteTodo = async (id: string) => {
   try {
     await connectDB();
 
