@@ -3,7 +3,7 @@
 import connectDB from "../config/database";
 import TodoModel from "../models/todoModel";
 
-export const getTodo = async () => {
+const getTodo = async () => {
   try {
     await connectDB();
 
@@ -14,3 +14,5 @@ export const getTodo = async () => {
     return { errMsg: error.message };
   }
 };
+
+export default getTodo;
