@@ -5,6 +5,7 @@ import edit from "@/public/edit.png";
 import { Types } from "@/types/types";
 import EditModal from "./EditModal";
 import useTodo from "@/hooks/useTodo";
+import { motion } from "framer-motion";
 
 const AddTodo = () => {
   const {
@@ -47,7 +48,10 @@ const AddTodo = () => {
 
       <ul className="flex flex-wrap justify-center gap-8">
         {todos.map((item: Types, index: number) => (
-          <li
+          <motion.li
+            initial={{ opacity: 0, y: -150 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             key={index}
             className="text-lg p-8 bg-yellow-600 text-white flex flex-col gap-16 w-[350px] rounded-lg justify-between"
           >
@@ -66,7 +70,7 @@ const AddTodo = () => {
                 <Image src={edit} alt="Edit Icon" width={20} height={20} />
               </button>
             </span>
-          </li>
+          </motion.li>
         ))}
       </ul>
 
