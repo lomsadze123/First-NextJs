@@ -3,11 +3,11 @@
 import connectDB from "../config/database";
 import TodoModel from "../models/todoModel";
 
-const postTodo = async (todoData: any) => {
+const postTodo = async (todoData: any, userId: string) => {
   try {
     await connectDB();
 
-    const newTodo = await TodoModel.create(todoData);
+    const newTodo = await TodoModel.create({ ...todoData, userId });
 
     return {
       success: true,

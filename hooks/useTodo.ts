@@ -4,7 +4,7 @@ import postTodo from "@/_actions/postTodo";
 import { Types } from "@/types/types";
 import { useEffect, useState } from "react";
 
-const useTodo = () => {
+const useTodo = (sessionId: string) => {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState<Types[]>([]);
   const [show, setShow] = useState(false);
@@ -12,7 +12,7 @@ const useTodo = () => {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const { data } = await getTodo();
+      const { data } = await getTodo(sessionId);
       setTodos(data);
     };
     fetchTodos();
@@ -20,8 +20,9 @@ const useTodo = () => {
 
   const handleAddTodo = async () => {
     if (newTodo.trim() !== "") {
-      await postTodo({ todo: newTodo });
-      setTodos([...todos, { todo: newTodo }]);
+      const todoData = { todo: newTodo };
+      await postTodo(todoData, sessionId);
+      setTodos([...todos, todoData]);
       setNewTodo("");
     }
   };

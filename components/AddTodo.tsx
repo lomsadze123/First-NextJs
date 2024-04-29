@@ -7,7 +7,7 @@ import EditModal from "./EditModal";
 import useTodo from "@/hooks/useTodo";
 import { motion } from "framer-motion";
 
-const AddTodo = () => {
+const AddTodo = ({ sessionId }: { sessionId: string }) => {
   const {
     handleEditTodo,
     handleAddTodo,
@@ -20,7 +20,7 @@ const AddTodo = () => {
     setEditedTodo,
     editedTodo,
     setTodos,
-  } = useTodo();
+  } = useTodo(sessionId);
 
   return (
     <main className="flex flex-col items-center gap-10 mt-4">
@@ -47,31 +47,37 @@ const AddTodo = () => {
       </form>
 
       <ul className="flex flex-wrap justify-center gap-8">
-        {todos.map((item: Types, index: number) => (
-          <motion.li
-            initial={{ opacity: 0, y: -150 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            key={index}
-            className="text-lg p-8 bg-yellow-600 text-white flex flex-col gap-16 w-[350px] rounded-lg justify-between"
-          >
-            <span className="text-center text-2xl">
-              {item.todo.split(" ").slice(0, 2).join(" ")}
-            </span>
-            <span>{item.todo}</span>
-            <span className="flex justify-between items-center text-base">
-              {item.createdAt
-                ? item.createdAt?.toString()
-                : "Refresh for new notes edit"}
-              <button onClick={() => handleDeleteTodo(item._id ?? "")}>
-                <Image src={trash} alt="Trash Icon" width={25} height={25} />
-              </button>
-              <button onClick={() => handleEditTodo(item._id ?? "")}>
-                <Image src={edit} alt="Edit Icon" width={20} height={20} />
-              </button>
-            </span>
-          </motion.li>
-        ))}
+        {todos.length === 0 ? (
+          <li className="text-gray-500 text-2xl mt-10">
+            You have not got notes yet...
+          </li>
+        ) : (
+          todos.map((item: Types, index: number) => (
+            <motion.li
+              initial={{ opacity: 0, y: -150 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              key={index}
+              className="text-lg p-8 bg-yellow-600 text-white flex flex-col gap-16 w-[350px] rounded-lg justify-between"
+            >
+              <span className="text-center text-2xl">
+                {item.todo.split(" ").slice(0, 2).join(" ")}
+              </span>
+              <span>{item.todo}</span>
+              <span className="flex justify-between items-center text-base">
+                {item.createdAt
+                  ? item.createdAt?.toString()
+                  : "Refresh for new notes edit"}
+                <button onClick={() => handleDeleteTodo(item._id ?? "")}>
+                  <Image src={trash} alt="Trash Icon" width={25} height={25} />
+                </button>
+                <button onClick={() => handleEditTodo(item._id ?? "")}>
+                  <Image src={edit} alt="Edit Icon" width={20} height={20} />
+                </button>
+              </span>
+            </motion.li>
+          ))
+        )}
       </ul>
 
       {show && (

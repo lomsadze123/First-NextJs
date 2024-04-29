@@ -41,7 +41,7 @@ const Login = () => {
         setError("Invalid credentials");
         return;
       }
-      router.replace("/");
+      router.replace("/todos");
     } catch (error) {
       setError(
         error instanceof z.ZodError
@@ -53,6 +53,9 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-xs mx-auto mt-8">
+      <h1 className="text-2xl text-center text-blue-500 mb-8">
+        Login to enter your note app
+      </h1>
       <div className="mb-4">
         <label htmlFor="email" className="block mb-2">
           Email

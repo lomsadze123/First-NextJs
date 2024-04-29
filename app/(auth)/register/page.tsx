@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 
 const Register = () => {
   const [info, setInfo] = useState({ username: "", email: "", password: "" });
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const schema = z.object({
     username: z.string().min(1),
@@ -36,6 +38,8 @@ const Register = () => {
       if (res.ok) {
         setInfo({ username: "", email: "", password: "" });
         setError("");
+        router.replace("/login");
+        router.refresh();
       } else {
         setError("Something went wrong");
       }
