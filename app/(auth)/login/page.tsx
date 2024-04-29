@@ -3,7 +3,7 @@
 import useLogin from "@/hooks/useLogin";
 
 const Login = () => {
-  const { handleInput, handleSubmit, info, error } = useLogin();
+  const { handleInput, handleSubmit, info, error, loading } = useLogin();
 
   return (
     <form onSubmit={handleSubmit} className="max-w-xs mx-auto mt-8">
@@ -38,10 +38,13 @@ const Login = () => {
       </div>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <button
+        disabled={loading}
         type="submit"
-        className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
+        className={`w-full py-2 ${
+          loading ? "bg-gray-500" : "bg-blue-500"
+        } text-white rounded-md hover:bg-blue-600 focus:outline-none`}
       >
-        Submit
+        {loading ? "Loading..." : "Submit"}
       </button>
     </form>
   );

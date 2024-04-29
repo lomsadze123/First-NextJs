@@ -7,6 +7,7 @@ const useLogin = () => {
   const router = useRouter();
   const [info, setInfo] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const schema = z.object({
     email: z.string().email("Invalid email format").min(1),
@@ -20,10 +21,12 @@ const useLogin = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Validate the input data
+      setLoading(true);
+
       const validationResult = schema.safeParse(info);
       if (validationResult.success === false) {
         setError(validationResult.error.errors[0].message);
+        setLoading(false);
         return;
       }
 
@@ -36,6 +39,7 @@ const useLogin = () => {
 
       if (res?.error) {
         setError("Invalid credentials");
+        setLoading(false);
         return;
       }
       router.replace("/todos");
@@ -45,10 +49,11 @@ const useLogin = () => {
           ? error.errors[0].message
           : "An error occurred"
       );
+      setLoading(false);
     }
   };
 
-  return { handleInput, handleSubmit, info, error };
+  return { handleInput, handleSubmit, info, error, loading };
 };
 
 export default useLogin;

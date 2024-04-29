@@ -6,6 +6,7 @@ const useRegister = () => {
   const [info, setInfo] = useState({ username: "", email: "", password: "" });
   const [error, setError] = useState("");
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const schema = z.object({
     username: z.string().min(1),
@@ -20,9 +21,11 @@ const useRegister = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const validationResult = schema.safeParse(info);
       if (validationResult.success === false) {
         setError(validationResult.error.errors[0].message);
+        setLoading(false);
         return;
       }
 
@@ -40,13 +43,15 @@ const useRegister = () => {
         router.refresh();
       } else {
         setError("Something went wrong");
+        setLoading(false);
       }
     } catch (error) {
       setError("An error occurred");
+      setLoading(false);
     }
   };
 
-  return { handleInput, handleSubmit, info, error };
+  return { handleInput, handleSubmit, info, error, loading };
 };
 
 export default useRegister;
