@@ -1,6 +1,6 @@
 import connectDB from "@/config/database";
 import User from "@/models/userModel";
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
@@ -28,7 +28,7 @@ const login = async (credentials: Record<string, string> | undefined) => {
   }
 };
 
-export const authOptions = {
+const authOptions: AuthOptions = {
   pages: {
     signIn: "/login",
   },
@@ -83,4 +83,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
