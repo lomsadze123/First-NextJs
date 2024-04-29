@@ -1,6 +1,6 @@
-# Next.js CRUD Note App
+# Next.js CRUD Note App with User Authentication
 
-This is a simple CRUD (Create, Read, Update, Delete) note-taking application built using Next.js. It allows users to add, edit, and delete notes.
+This is a simple CRUD (Create, Read, Update, Delete) note-taking application with user authentication, built using Next.js. It allows users to securely manage their notes by providing features such as adding, editing, and deleting notes.
 
 ## Features
 
@@ -8,6 +8,7 @@ This is a simple CRUD (Create, Read, Update, Delete) note-taking application bui
 - Edit existing notes
 - Delete notes
 - Responsive design for various screen sizes
+- Authentication for user access control
 
 ## Technologies Used
 
