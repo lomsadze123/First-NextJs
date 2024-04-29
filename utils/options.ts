@@ -77,7 +77,9 @@ const authOptions = {
       return session;
     },
   },
-  secret: process.env.YOUR_SECRET_NAME,
+  secret:
+    process.env.YOUR_SECRET_NAME ||
+    "6a33ad59526fdd813d351dfa5005cb715b8b612ff08eefc361d171c940ab0126",
 };
 
 export default authOptions;
