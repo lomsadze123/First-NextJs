@@ -1,7 +1,7 @@
 import AddTodo from "@/components/AddTodo";
 import Logout from "@/components/Logout";
+import authOptions from "@/utils/options";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import Link from "next/link";
 
 const Todo = async () => {
